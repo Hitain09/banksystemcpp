@@ -1,7 +1,8 @@
 # banksystemcpp
-Bank Management System using file handling
-The Project takes the bank details from user i.e.. Bank account details,etc. 
-The user could edit the account details at any time.
+This application needs login credentials to operate the system. 
+File handling is used to store the data of users. 
+The Project takes the bank details from user and  The user could edit the account details at any time.
+
 
 LogIn Credentials:
 
