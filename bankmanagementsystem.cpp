@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<cctype>
+#include<string.h>
 #include<iomanip>
 using namespace std;
 
@@ -14,6 +15,7 @@ class account
 	int deposit;
 	char type;
 public:
+	bool getAdminDetails();
 	void create_account();				//function to get data from user
 	void show_account() const;			//function to show data on screen
 	void modify();						//function to add new data
@@ -28,6 +30,25 @@ public:
 
 
 //MEMBER FUNCTIONS OF CLASS
+
+bool account::getAdminDetails(){
+	#pragma warning(suppress: 4101)
+	string str = "admin";
+	string passKey = "passwords2";
+	string user;
+	string pass;
+	cout<<"\n\n\tEnter Username: ";
+	cin>>user;
+	cout<<"\tEnter passKey: ";
+	cin>>pass;
+	if((str == user) && (passKey == pass)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 
 void account::create_account()
 {
@@ -339,6 +360,10 @@ int main()
 	char ch;
 	int num;
 	intro();
+	account acc;
+	#pragma warning(suppress: 4101)
+	bool admin = acc.getAdminDetails();
+	if(admin == true){
 	do
 	{
 		system("cls");
@@ -391,5 +416,11 @@ int main()
 		cin.ignore();
 		cin.get();
 	}while(ch!='8');
+}
+else{
+	cout<<"\n\n\t\tAUTHENTICATION DENIED!!!!";
+	cout<<"\n\t\tLogin Again: ";
+	acc.getAdminDetails();
+}
 	return 0;
 }
