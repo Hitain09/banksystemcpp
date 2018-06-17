@@ -14,6 +14,9 @@ class account
 	char name[50];
 	int deposit;
 	char type;
+    char mailID[50];
+    char phoneNumber[10];
+    
 public:
 	bool getAdminDetails();
 	void create_account();				//function to get data from user
@@ -55,14 +58,19 @@ void account::create_account()
 	bool depo = false;
 	cout<<"\nEnter The account No. :";
 	cin>>account_no;
-	cout<<"\n\nEnter The Name of The account Holder : ";
+    cout<<"\n\nEnter The Name of The account Holder : ";
 	cin.ignore();
 	cin.getline(name,50);
+    cout<<"\nEnter E-mail ID :";
+    cin>>mailID;
+    cout<<"\nEnter phone No. :";
+    cin>>phoneNumber;
 	cout<<"\nEnter Type of The account (C/S) : ";
 	cin>>type;
 	type=toupper(type);
 	cout<<"\nEnter The Initial amount(>=500 for Saving and >=1000 for current ) : ";
 	cin>>deposit;
+    
 	while(depo == false)
 	{
 		if(type == 'C' )
@@ -94,6 +102,10 @@ void account::show_account() const
 	cout<<"\nAccount No. : "<<account_no;
 	cout<<"\nAccount Holder Name : ";
 	cout<<name;
+    cout<<"\nAccount Holder Email ID : ";
+    cout<<mailID;
+    cout<<"\nAccount Holder Contact Number : ";
+    cout<<phoneNumber;
 	cout<<"\nType of Account : "<<type;
 	cout<<"\nBalance amount : "<<deposit;
 }
@@ -104,12 +116,16 @@ void account::modify()
 	cout<<"\nAccount No. : "<<account_no;
 	cout<<"\nModify Account Holder Name : ";
 	cin.ignore();
-	cin.getline(name,50);
-	cout<<"\nModify Type of Account : ";
-	cin>>type;
-	type=toupper(type);
-	cout<<"\nModify Balance amount : ";
-	cin>>deposit;
+    cin.getline(name,50);
+    cout<<"\nModify E-mail ID :";
+    cin>>mailID;
+    cout<<"\nModify phone No. :";
+    cin>>phoneNumber;
+    cout<<"\nModify Type of Account : ";
+    cin>>type;
+    type=toupper(type);
+    cout<<"\nModify Balance amount : ";
+    cin>>deposit;
 }
 
 	
@@ -125,7 +141,7 @@ void account::draw(int x)
 	
 void account::report() const
 {
-	cout<<account_no<<setw(10)<<" "<<name<<setw(10)<<" "<<type<<setw(10)<<deposit<<endl;
+	cout<<account_no<<setw(10)<<" "<<name<<setw(10)<<" "<<type<<setw(10)<<deposit<<setw(10)<<mailID<<setw(10)<<phoneNumber<<endl;
 }
 
 	
@@ -280,9 +296,9 @@ void display_all()
 		return;
 	}
 	cout<<"\n\n\t\tACCOUNT HOLDER LIST\n\n";
-	cout<<"====================================================\n";
-	cout<<"A/c no.      NAME           Type          Balance\n";
-	cout<<"====================================================\n";
+	cout<<"=======================================================================================\n";
+	cout<<"A/c no.      NAME           Type          Balance          Mail-ID          PhoneNumber\n";
+	cout<<"=======================================================================================\n";
 	while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account)))
 	{
 		ac.report();
@@ -314,7 +330,7 @@ void deposit_withdraw(int n, int option)
 			ac.show_account();
 			if(option == 1)
 			{
-				cout<<"\n\n\tTO DEPOSITE AMOUNT ";
+				cout<<"\n\n\tTO DEPOSIT AMOUNT ";
 				cout<<"\n\nEnter The amount to be deposited : ";
 				cin>>amount;
 				ac.dep(amount);
@@ -326,7 +342,7 @@ void deposit_withdraw(int n, int option)
 				cin>>amount;
 				int bal = ac.return_deposit()-amount;
 				if((bal<500 && ac.return_type()=='S') || (bal<1000 && ac.return_type()=='C'))
-					cout<<"Insufficience balance";
+					cout<<"Low balance";
 				else
 					ac.draw(amount);
 			}
@@ -361,7 +377,10 @@ int main()
 	int num;
 	intro();
 	account acc;
+<<<<<<< Updated upstream
 	#pragma warning(suppress: 4101)
+=======
+>>>>>>> Stashed changes
 	bool admin = acc.getAdminDetails();
 	if(admin == true){
 	do
